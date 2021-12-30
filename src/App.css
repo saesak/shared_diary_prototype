@@ -25,7 +25,9 @@ h1 {
   border: 2px solid #808080;
   position: relative;
   background-color: transparent white;
+  z-index: 1;
 }
+
   
 .Menu {
   width: 650px;
@@ -39,13 +41,22 @@ h1 {
   margin-top: 10px;
 }
 
+.text-area {
+  position: absolute;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 40%;
+  z-index: 0;
+}
+
 .text-area textarea {
   background: transparent;
-  position: relative;
   color: transparent black;
-  width: 80%;
-  height: 100%;
-  bottom: 60vh;
+  display: block;
+  height: 80vh;
+  width: 99%;
 }
   
 

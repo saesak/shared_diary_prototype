@@ -14,6 +14,8 @@ function Paint() {
     const [lineWidth, setLineWidth] = useState(5);
     const [lineColor, setLineColor] = useState("black");
     const [lineOpacity, setLineOpacity] = useState(0.1);
+    const [currMode, setMode] = useState('Text');
+
 
 
     // Initialization when the component
@@ -34,6 +36,7 @@ function Paint() {
         function toggleText() {
             document.getElementsByClassName('draw-area')[0].style.zIndex = '0';
             document.getElementsByClassName('text-area')[0].style.zIndex = '1';
+            setMode('Text');
         }
         document.addEventListener('keydown', toggleText);
     }, [lineColor, lineOpacity, lineWidth]);
@@ -45,7 +48,6 @@ function Paint() {
         ctxRef.current.beginPath(); //beginPath is an html method used for 2d context to draw stuff on a canvas 
 
         //shift z index to make drawing possible
-        console.log(document.getElementsByClassName('draw-area')[0])
         document.getElementsByClassName('draw-area')[0].style.zIndex = '1';
         document.getElementsByClassName('text-area')[0].style.zIndex = '0';
 
@@ -72,6 +74,7 @@ function Paint() {
             );
         }
         setIsDrawing(true);
+        setMode('Drawing');
     };
 
     // Function for ending the drawing
@@ -80,7 +83,6 @@ function Paint() {
         //close drawing path
         ctxRef.current.closePath();
         setIsDrawing(false);
-
     };
 
     const draw = (e) => {
@@ -119,20 +121,25 @@ function Paint() {
                     setLineColor={setLineColor}
                     setLineWidth={setLineWidth}
                     setLineOpacity={setLineOpacity}
+                    setMode={setMode}
+                    currMode={currMode}
                 />
-                <canvas
-                    onMouseDown={startDrawing}
-                    onMouseUp={endDrawing}
-                    onMouseMove={draw}
-                    onTouchStart={startDrawing}
-                    onTouchMove={draw}
-                    onTouchEnd={endDrawing}
-                    ref={canvasRef}
-                    width={`1050px`}
-                    height={`800px`}
-                />
+                <div className="draw-canvas">
+                    <canvas
+                        onMouseDown={startDrawing}
+                        onMouseUp={endDrawing}
+                        onMouseMove={draw}
+                        onTouchStart={startDrawing}
+                        onTouchMove={draw}
+                        onTouchEnd={endDrawing}
+                        ref={canvasRef}
+                        width={`1050px`}
+                        height={`800px`}
+                    />
+                </div>
             </div>
             <Page/>
+            
 
         </div>
     );

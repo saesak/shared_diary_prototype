@@ -2,18 +2,17 @@ import {useState, React} from "react";
 import "../App.css";
 
 const Menu = ({ setLineColor, setLineWidth,
-    setLineOpacity }) => {
+    setLineOpacity, setMode, currMode }) => {
 
-    const [isText, setIsText] = useState('Text');
     
     const toggleMode = () => {
-        if (isText == 'Text') {
-            setIsText('Drawing')
+        if (currMode == 'Text') {
+            setMode('Drawing')
             document.getElementsByClassName('draw-area')[0].style.zIndex = '1';
             document.getElementsByClassName('text-area')[0].style.zIndex = '0';
         }
-        if (isText == 'Drawing') {
-            setIsText('Text')
+        if (currMode == 'Drawing') {
+            setMode('Text')
             document.getElementsByClassName('draw-area')[0].style.zIndex = '0';
             document.getElementsByClassName('text-area')[0].style.zIndex = '1';
         }
@@ -48,7 +47,7 @@ const Menu = ({ setLineColor, setLineWidth,
             />
             <label>Toggle Text or Drawing</label>    
             <button onClick={toggleMode}>
-                Currently {isText}
+                Currently {currMode}
             </button>
         </div>
     );
