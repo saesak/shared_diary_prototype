@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Menu from "./Menu";
 import "../App.css";
+import Page from "./Page";
 
 function Paint() {
     //basically refs allow you to use raw html elements and methods
@@ -13,11 +14,13 @@ function Paint() {
     const [lineWidth, setLineWidth] = useState(5);
     const [lineColor, setLineColor] = useState("black");
     const [lineOpacity, setLineOpacity] = useState(0.1);
-    const [isStylus, setIsStylus] = useState(false);
+
 
     // Initialization when the component
     // mounts for the first time
     useEffect(() => {
+
+        //painting canvas initialization
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
         ctx.lineCap = "round";
@@ -26,6 +29,13 @@ function Paint() {
         ctx.strokeStyle = lineColor;
         ctx.lineWidth = lineWidth;
         ctxRef.current = ctx;
+
+        //adding listeners for onKeyDown
+        function toggleText() {
+            document.getElementsByClassName('draw-area')[0].style.zIndex = '0';
+            document.getElementsByClassName('text-area')[0].style.zIndex = '1';
+        }
+        document.addEventListener('keydown', toggleText);
     }, [lineColor, lineOpacity, lineWidth]);
 
     // Function for starting the drawing
@@ -33,6 +43,12 @@ function Paint() {
         //weird bug where if you just press down, nothing happens   
         console.log(e);
         ctxRef.current.beginPath(); //beginPath is an html method used for 2d context to draw stuff on a canvas 
+
+        //shift z index to make drawing possible
+        console.log(document.getElementsByClassName('draw-area')[0])
+        document.getElementsByClassName('draw-area')[0].style.zIndex = '1';
+        document.getElementsByClassName('text-area')[0].style.zIndex = '0';
+
         if(e._reactName == 'onMouseDown') {
             console.log(e.nativeEvent.offsetY)
             ctxRef.current.moveTo(
@@ -61,8 +77,10 @@ function Paint() {
     // Function for ending the drawing
     const endDrawing = (e) => {
         console.log(e);
+        //close drawing path
         ctxRef.current.closePath();
         setIsDrawing(false);
+
     };
 
     const draw = (e) => {
@@ -110,10 +128,12 @@ function Paint() {
                     onTouchMove={draw}
                     onTouchEnd={endDrawing}
                     ref={canvasRef}
-                    width={`1280px`}
-                    height={`720px`}
+                    width={`1050px`}
+                    height={`800px`}
                 />
             </div>
+            <Page/>
+
         </div>
     );
 }
