@@ -19,7 +19,8 @@ Back then, I had implemented the diary entry where you could both use touch and 
 diary as well. This time, I implemented the time display, routing, backend, created an sql db and 
 the code storing and getting the data from the sql db. I also implemented the page where you can see
 your own entries. This took more time than expected because figuring out how to store the canvas(ended up using blob)
-and text(while preserving newlines) into a database was tricky.
+and text(while preserving newlines) into a database was tricky, and a problem with my initial version of sql
+caused me to have to reinstall it from scratch. 
 
 Working video of project: 
 https://www.youtube.com/watch?v=skjK6QLLe6M
