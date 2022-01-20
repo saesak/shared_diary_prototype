@@ -5,15 +5,21 @@ class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'Start your diary here!'
+            value: 'Start your diary here!',
+            title: 'Default Title'
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTitle = this.handleTitle.bind(this);
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
+    }
+
+    handleTitle(event) {
+        this.setState({ title: event.target.value })
     }
 
     handleSubmit(event) {
@@ -24,7 +30,7 @@ class Page extends React.Component {
         //referenced this post about saving canvas as a blob
         //https://stackoverflow.com/questions/44806870/saving-canvas-to-json-and-loading-json-to-canvas
         axios.post('http://localhost:4444/save', {
-            title: 'SAMPLE',
+            title: this.state.title,
             date: date.toLocaleTimeString(),
             canvas: document.querySelector('canvas').toDataURL(),
             text: this.state.value
@@ -48,6 +54,10 @@ class Page extends React.Component {
     render() {
         return (
             <div className="text-area">
+                <label>
+                    Title:
+                <input type="text" value={this.state.title} onChange={this.handleTitle} />
+                </label>
                 <form>
                     <textarea value={this.state.value} onChange={this.handleChange} />
                 </form>
