@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Paint from './components/Paint';
+import Entries from './components/Entries';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element = {<Paint/>} />
+        <Route path="/entries" element = {<Entries/>} />
+      </Routes>
+    </Router>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

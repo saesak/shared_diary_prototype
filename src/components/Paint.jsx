@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Menu from "./Menu";
 import "../App.css";
 import Page from "./Page";
+import { Outlet, Link } from 'react-router-dom';
+
 
 function Paint() {
     //basically refs allow you to use raw html elements and methods
@@ -15,6 +17,7 @@ function Paint() {
     const [lineColor, setLineColor] = useState("black");
     const [lineOpacity, setLineOpacity] = useState(0.1);
     const [currMode, setMode] = useState('Text');
+    const [date, setDate] = useState(new Date())
 
 
 
@@ -39,6 +42,15 @@ function Paint() {
             setMode('Text');
         }
         document.addEventListener('keydown', toggleText);
+
+        //set current date
+        var timer = setInterval(() => setDate(new Date()),1000)
+
+        return function cleanup() {
+            clearInterval(timer) //resets timer to avoid any memory leaks
+        }
+
+
     }, [lineColor, lineOpacity, lineWidth]);
 
     // Function for starting the drawing
@@ -59,7 +71,6 @@ function Paint() {
             );
         }
         if(e._reactName == 'onTouchStart') {
-            console.log('hiii')
             console.log(e.nativeEvent.touches[0].pageY)
             //courtesy of
             //https://stackoverflow.com/questions/33548926/how-to-detect-touchmove-length-offsets
@@ -86,7 +97,6 @@ function Paint() {
     };
 
     const draw = (e) => {
-        //console.log(e);
         if (!isDrawing) {
             return;
         }
@@ -115,7 +125,11 @@ function Paint() {
 
     return (
         <div className="Paint">
-            <h1>Paint App</h1>
+            <h1>Time: {date.toLocaleTimeString()}</h1>
+            <nav>
+                    <Link to="/entries">Journal Entries</Link>
+            </nav>
+            <Outlet />
             <div className="draw-area">
                 <Menu
                     setLineColor={setLineColor}
