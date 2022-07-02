@@ -1,6 +1,5 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Working video of project: 
+https://www.youtube.com/watch?v=skjK6QLLe6M
 
 Summary of Project: This project is a prototype of a shared diary, where users can write an online
 diary together and look at each others' diaries. Currently, the functionalities of this diary are
@@ -22,14 +21,6 @@ your own entries. This took more time than expected because figuring out how to 
 and text(while preserving newlines) into a database was tricky, and a problem with my initial version of sql
 caused me to have to reinstall it from scratch. 
 
-Working video of project: 
-https://www.youtube.com/watch?v=skjK6QLLe6M
-
-
-
-
-
-
 Links I referred to:
 
 https://www.geeksforgeeks.org/how-to-create-a-paint-app-in-reactjs/
@@ -39,6 +30,3 @@ between text and drawing modes.
 
 Notes:
 React Paradigm --> pass data down from parent to children, pass actions up so they get executed in parent
-
-
-
