@@ -5,10 +5,8 @@ Summary of Project: This project is a prototype of a shared diary, where users c
 diary together and look at each others' diaries. Currently, the functionalities of this diary are
 1. writing and saving an entry and 2. looking at what entries are stored on the database
 
-Features: 
-Frontend - Components
-Full stack - linking together a front and back end
-Backend - api calls, integration with database
+Frontend - React.js
+Backend - MySQL
 
 Links I referred to:
 
